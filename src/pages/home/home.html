@@ -1,14 +1,56 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Login
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
+
+  <ion-list *ngIf="!provider.loggedin">
+
+
+    <ion-item>
+      <img src="http://web.excellentdigitizing.com/Images/LoginIcon.png"/>
+      <button block ion-button (click)="signIn()">
+        Iniciar Sesion
+      </button>
+      <button block ion-button (click)="register()">
+          Registrarse
+        </button>
+    </ion-item>
+   
+
+  </ion-list>
+
+
+  <button block ion-button (click)="loginWithFacebook()" *ngIf="!provider.loggedin" class="facebook">Login With Facebook
+    <ion-icon name="logo-facebook"></ion-icon>
+  </button>
+
+  <button block ion-button (click)="loginWithGoogle()" *ngIf="!provider.loggedin" class="google">Login With Google
+    <ion-icon name="logo-google"></ion-icon>
+  </button>
+
+  <button block ion-button (click)="loginWithTwitter()" *ngIf="!provider.loggedin" class="twitter">Login With Twitter
+    <ion-icon name="logo-twitter"></ion-icon>
+  </button>
+
+  <ion-card *ngIf="provider.loggedin">
+    <img src="{{provider.profilePicture}}" />
+    <ion-card-content>
+      <ion-card-title>
+        {{provider.name}}
+      </ion-card-title>
+      <p>
+        {{provider.email}}
+      </p>
+    </ion-card-content>
+  </ion-card>
+
+  <button ion-button (click)="logout()" *ngIf="provider.loggedin">Logout</button>
   <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
+
   </p>
 </ion-content>
